@@ -11,6 +11,10 @@ Then it creates a serial connection (`/dev/ttyUSB0`) with a baudrate of **115200
 ### 2. Data Acquisition & Processing:
 The device can take up to 1024 measurement nodes per scan. The raw data is sorted then in ascending order by angle, then it converts the angles in degrees and the distance in meters. In the end the angle, distance, quality and start flag are sent in an array in a protobuf message with a timestamp.
 
+Below is an example plot of the lidar scan data:
+
+![Example Lidar Plot](https://github.com/user-attachments/assets/aefe9b98-3680-455a-ac48-151c46525291)
+
 ### 3. Graceful Shutdown:
 **SIGINT** and **SIGTERM** signals are caught to stop the LIDAR motor and clean up all the memory allocated to the scans arrays. This ensures a safe shutdown of the service and the LIDAR sensor.
 
