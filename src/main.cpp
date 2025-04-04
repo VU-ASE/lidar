@@ -29,6 +29,9 @@ long long current_time_millis() {
 // The main user space program
 // this program has all you need from roverlib: service identity, reading, writing and configuration
 int user_program(Service service, Service_configuration *configuration) {
+  // Set stdout buffer to NULL for immediate output
+  setbuf(stdout, NULL);
+
   // Check if configuration is loaded correctly
   if (configuration == NULL) {
     printf("Configuration cannot be accessed\n");
