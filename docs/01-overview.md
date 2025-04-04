@@ -9,7 +9,7 @@ The service reads configuration values for the speed and the mode. The speed can
 Then it creates a serial connection (`/dev/ttyUSB0`) with a baudrate of **115200**, from where it retrieves the device information and prints it.
 
 ### 2. Data Acquisition & Processing:
-The device can take up to 1024 measurement nodes per scan. The raw data is sorted then in ascending order by angle, then it converts the angles in degrees and the distance in meters. In the end the angle, distance, quality and start flag are sent in an array in a protobuf message with a timestamp.
+The device can take up to 1024 measurement nodes per scan. The raw data is sorted then in ascending order by angle, then it converts the angles in degrees and the distance in millimeters. In the end the angle, distance, quality and start flag are sent in an array in a protobuf message with a timestamp.
 
 Below is an example plot of the lidar scan data:
 

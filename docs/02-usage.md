@@ -13,7 +13,7 @@ pb_output.SensorOutput{
             Scans: []*pb_output.LidarSensorOutput_Scan{
                 {
                     Angle:    float32(angle in degrees),
-                    Distance: float32(distance in meters),
+                    Distance: float32(distance in millimeters),
                     Quality:  uint32(measurement quality),
                     IsStart:  bool (true if scan start, false otherwise),
                 },
@@ -28,6 +28,6 @@ pb_output.SensorOutput{
 
 Each `Scan` includes:
 1. `Angle`, a `float32` value representing the angle in degrees.
-2. `Distance`, a `float32` value representing the distance in meters.
+2. `Distance`, a `float32` value representing the distance in millimeters.
 3. `Quality`, an `uint32` value indicating the measurement quality.
 4. `IsStart`, a `boolean` value indicating whether this measurement marks the start of a new scan.

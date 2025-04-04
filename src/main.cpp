@@ -152,7 +152,7 @@ int user_program(Service service, Service_configuration *configuration) {
         *lidar_sensor_output.scans[i] = PROTOBUF_MSGS__LIDAR_SENSOR_OUTPUT__SCAN__INIT;
         // Store angle data in degrees
         lidar_sensor_output.scans[i]->angle = (nodes[i].angle_z_q14 * 90.f) / 16384.f;
-        // Store distance data in meters
+        // Store distance data in millimeters
         lidar_sensor_output.scans[i]->distance = nodes[i].dist_mm_q2/4.0f;
         // Store the quality of the measurement
         lidar_sensor_output.scans[i]->quality = nodes[i].quality >> SL_LIDAR_RESP_MEASUREMENT_QUALITY_SHIFT;
