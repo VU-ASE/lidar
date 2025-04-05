@@ -1,5 +1,5 @@
 {
-    "name": "ASE-roverlib-c",
+    "name": "ASE-lidar",
     "build": {
         "dockerfile": "Dockerfile",
         "context": ".."

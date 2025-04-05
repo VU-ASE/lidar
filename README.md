@@ -7,4 +7,4 @@
 </div>
 <br/>
 
-**The `lidar` service uses the mounted lidar to scan the environment and send the angles (degrees), distance (meters), quality (of the signal).**
+**The `lidar` service uses the mounted lidar to scan the environment and send the angles (degrees), distance (millimeters), quality (of the signal).**
