@@ -13,7 +13,8 @@ The device can take up to 1024 measurement nodes per scan. The raw data is sorte
 
 Below is an example plot of the lidar scan data:
 
-![Example Lidar Plot](https://github.com/user-attachments/assets/aefe9b98-3680-455a-ac48-151c46525291)
+![Example Lidar Plot](https://github.com/user-attachments/assets/b073d3a1-81de-4da2-ac49-d215327075f0)
+
 
 ### 3. Graceful Shutdown:
 **SIGINT** and **SIGTERM** signals are caught to stop the LIDAR motor and clean up all the memory allocated to the scans arrays. This ensures a safe shutdown of the service and the LIDAR sensor.
