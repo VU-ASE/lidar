@@ -18,17 +18,9 @@ build-docker:
 
 # This target clones roverlib-c so that it can be compiled along side the service
 fetch-roverlib-c:
-	@if [ ! -d "lib" ] || [ -z "$$(ls -A lib 2>/dev/null)" ]; then \
-		echo "roverlib-c directory doesn't exist or is empty. Cloning into lib..."; \
-		git clone https://github.com/VU-ASE/roverlib-c.git lib; \
-	elif [ ! -d "lib/.git" ]; then \
-		echo "directory lib exists but is not a git repository. Recloning..."; \
-		rm -rf lib; \
-		git clone https://github.com/VU-ASE/roverlib-c.git lib; \
-	else \
-		echo "getting latest roverlib-c"; \
-		cd lib && git pull; \
-	fi
+	@echo "Removing existing roverlib-c and cloning fresh copy..."
+	@rm -rf lib
+	@git clone https://github.com/VU-ASE/roverlib-c.git lib
 
 # This target clones the rplidar_sdk so that it can be compiled alongside the service
 fetch-lidar-sdk:
