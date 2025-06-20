@@ -101,7 +101,9 @@ build: fetch-roverlib-c fetch-lidar-sdk edit-headers
 
 start: build
 	@echo "starting ${BINARY_NAME}"
-	./${BUILD_DIR}${BINARY_NAME} 
+	# Add /usr/local/lib as a possible location for shared libraries, fix for when
+	# working in a devcontainer
+	@LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH ./${BUILD_DIR}${BINARY_NAME} 
 
 debug: build
 	@echo "Starting program in debug mode with injected bootspec"
