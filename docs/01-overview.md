@@ -1,24 +1,60 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Overview
-The `lidar` service interfaces with an **SLAMTEC RPLIDAR A2M8** sensor to capture and profcess 2D laser scan data.
 
-## How it works
+## Purpose 
 
-### 1. Initialization & Configuration:
-The service reads configuration values for the speed and the mode. The speed can takes rpm values in the range of 300-900 with a default value of 600. If an incorrect value is inputed, it is handled by the driver implementation and it should just use the default one. The mode can be **0 (for Standard)**, **1 (for Express)** and **2 (for Boost)**.
+The `lidar` service uses the **SLAMTEC RPLIDAR A2M8** sensor to capture and process 2D laser scan data.
 
-Then it creates a serial connection (`/dev/ttyUSB0`) with a baudrate of **115200**, from where it retrieves the device information and prints it.
+:::info
 
-### 2. Data Acquisition & Processing:
-The device can take up to 1024 measurement nodes per scan. The raw data is sorted then in ascending order by angle, then it converts the angles in degrees and the distance in millimeters. In the end the angle, distance, quality and start flag are sent in an array in a protobuf message with a timestamp.
+This service requires an extra sensor that does not come preinstalled with every Rover. See the [requirements](#requirements) section.
 
-Below is an example plot of the lidar scan data:
+:::
 
-![Example Lidar Plot](https://github.com/user-attachments/assets/b073d3a1-81de-4da2-ac49-d215327075f0)
+## Installation
 
+To install this service, the latest release of [`roverctl`](https://ase.vu.nl/docs/framework/Software/rover/roverctl/installation) should be installed for your system and your Rover should be powered on.
 
-### 3. Graceful Shutdown:
-**SIGINT** and **SIGTERM** signals are caught to stop the LIDAR motor and clean up all the memory allocated to the scans arrays. This ensures a safe shutdown of the service and the LIDAR sensor.
+<Tabs groupId="installation-method">
+<TabItem value="roverctl" label="Using roverctl" default>
 
-## Reference
-- For more detailed specifications and additional information on the **SLAMTEC RPLIDAR A2M8** sensor, please refer to the official documentation: [RPLIDAR A Series Support](https://www.slamtec.com/en/Support#rplidar-a-series).
-- For the source code and further details about the SDK, check out the GitHub repository: [slamtec/rplidar_sdk](https://github.com/slamtec/rplidar_sdk).
+1. Clone this repository to your machine
+```bash
+git clone https://github.com/VU-ASE/lidar.git
+```
+2. Enter the newly created *lidar* directory
+```bash
+cd lidar
+```
+3. Upload the *lidar* service to your Rover. Do not forget the trailing `.`!
+```bash
+# Replace ROVER_NUMBER with your the number label on your Rover (e.g. 7)
+roverctl upload -r <ROVER_NUMBER> .
+```
+
+</TabItem>
+<TabItem value="roverctl-web" label="Using roverctl-web">
+
+This service is not released automatically so it cannot be installed through `roverctl-web`.
+
+</TabItem>
+</Tabs>
+
+Follow [this tutorial](https://ase.vu.nl/docs/tutorials/write-a-service/upload) to understand how to use an ASE service. You can find more useful `roverctl` commands [here](/docs/framework/Software/rover/roverctl/usage)
+
+## Requirements
+
+- A SLAMTEC RPLIDAR A2M8 needs to be connected over USB for this service to work
+
+## Inputs
+
+As defined in the [*service.yaml*](https://github.com/VU-ASE/lidar/blob/main/service.yaml), this service does not depend on any other service.
+
+## Outputs
+
+As defined in the [*service.yaml*](https://github.com/VU-ASE/lidar/blob/main/service.yaml), this service exposes the following write streams:
+
+- `lidar-data`:
+    - To this stream, [`LidarSensorOutput`](https://github.com/VU-ASE/rovercom/blob/c1d6569558e26d323fecc17d01117dbd089609cc/definitions/outputs/lidar.proto#L11) messages will be written. Each message will be wrapped in a [`SensorOutput` wrapper message](https://github.com/VU-ASE/rovercom/blob/main/definitions/outputs/wrapper.proto)

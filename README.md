@@ -7,4 +7,5 @@
 </div>
 <br/>
 
-**The `lidar` service uses the mounted lidar to scan the environment and send the angles (degrees), distance (millimeters), quality (of the signal).**
+**This repository houses the `lidar` [service](https://ase.vu.nl/docs/framework/glossary/service), which can be used in a [pipeline](https://ase.vu.nl/docs/framework/glossary/pipeline) on an ASE Rover. To get started, take a look at its [documentation](https://ase.vu.nl/docs/category/lidar)**
+
